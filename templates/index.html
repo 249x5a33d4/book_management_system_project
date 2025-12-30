@@ -22,30 +22,30 @@
         <td>
             <a href="{{ url_for('edit', book_id=b.id) }}">Edit</a> |
             <form action="{{ url_for('delete', book_id=b.id) }}" method="POST"
-                  style="display:inline"
+                  class="inline"
                   onsubmit="return confirm('Delete this book?');">
-                <button type="submit">Delete</button>
+                <button type="submit" class="danger-btn">Delete</button>
             </form>
         </td>
     </tr>
     {% endfor %}
 </table>
 {% else %}
-<p>No books yet.</p>
+<p>No books added yet.</p>
 {% endif %}
 
-<hr>
+<hr style="margin: 30px 0;">
 
 <h2>Add New Book</h2>
 <form method="POST">
-    <label>Book Title:</label><br>
-    <input type="text" name="title" required><br>
+    <label>Book Title:</label>
+    <input type="text" name="title" required>
 
-    <label>Author:</label><br>
-    <input type="text" name="author" required><br>
+    <label>Author:</label>
+    <input type="text" name="author" required>
 
-    <label>Year:</label><br>
-    <input type="number" name="year" min="0"><br>
+    <label>Year:</label>
+    <input type="number" name="year" min="0">
 
     <button type="submit">Add Book</button>
 </form>
