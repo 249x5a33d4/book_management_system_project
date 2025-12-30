@@ -97,16 +97,6 @@ Your app will be live at:\
 
 ------------------------------------------------------------------------
 
-## 📸 Screenshots (Optional)
-
-You may add screenshots later, such as:
-
--   UI Homepage\
--   Add Book page\
--   Edit Book page
-
-------------------------------------------------------------------------
-
 ## 🛠 Requirements
 
     Flask==3.1.2
