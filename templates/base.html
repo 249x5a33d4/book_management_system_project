@@ -1,9 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Book Management</title>
 
     <style>
+        :root {
+            --bg: #f4f7fb;
+            --text: #333;
+            --card-bg: #ffffff;
+            --border: #e0e0e0;
+            --primary: #3498db;
+            --primary-dark: #2b84c4;
+            --danger: #e74c3c;
+            --danger-dark: #c0392b;
+        }
+
+        /* DARK MODE VARIABLES */
+        .dark {
+            --bg: #121212;
+            --text: #e6e6e6;
+            --card-bg: #1e1e1e;
+            --border: #333;
+            --primary: #4ea3ff;
+            --primary-dark: #1f75c0;
+            --danger: #ff6b6b;
+            --danger-dark: #d94242;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,97 +35,117 @@
         }
 
         body {
-            background: #f4f7fb;
+            background: var(--bg);
             padding: 30px;
-            color: #333;
+            color: var(--text);
+            transition: all 0.3s ease;
         }
 
         .container {
             max-width: 900px;
             margin: auto;
-            background: white;
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 12px;
+            border: 1px solid var(--border);
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: 0.3s ease;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 25px;
-            color: #2c3e50;
             font-weight: 600;
         }
 
         h2 {
             margin: 20px 0 10px;
-            color: #34495e;
             font-weight: 500;
         }
 
-        /* Table */
+        /* Toggle Button */
+        .theme-toggle {
+            float: right;
+            margin-top: -15px;
+            margin-right: -10px;
+        }
+
+        .toggle-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .toggle-btn:hover {
+            background: var(--primary-dark);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
-            overflow: hidden;
             border-radius: 10px;
+            overflow: hidden;
         }
 
         th {
-            background: #3498db;
+            background: var(--primary);
             color: white;
             padding: 12px;
         }
 
         td {
-            background: #fdfdfd;
+            background: var(--card-bg);
             padding: 10px;
-            border-bottom: 1px solid #e4e4e4;
+            border-bottom: 1px solid var(--border);
         }
 
         tr:hover td {
-            background: #f3f9ff;
+            background: rgba(0, 0, 0, 0.05);
         }
 
-        /* Inputs */
         input {
             width: 100%;
             padding: 10px;
             margin: 6px 0 12px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--border);
             border-radius: 6px;
-            outline: none;
+            background: var(--card-bg);
+            color: var(--text);
         }
 
         input:focus {
-            border-color: #3498db;
+            border-color: var(--primary);
         }
 
-        /* Buttons */
         button {
             padding: 10px 18px;
             border: none;
             border-radius: 6px;
-            background: #3498db;
+            background: var(--primary);
             color: white;
-            cursor: pointer;
             font-size: 14px;
+            cursor: pointer;
         }
 
         button:hover {
-            background: #2b84c4;
+            background: var(--primary-dark);
         }
 
         .danger-btn {
-            background: #e74c3c;
+            background: var(--danger);
         }
 
         .danger-btn:hover {
-            background: #c0392b;
+            background: var(--danger-dark);
         }
 
         a {
-            color: #3498db;
+            color: var(--primary);
             text-decoration: none;
         }
 
@@ -110,21 +153,65 @@
             text-decoration: underline;
         }
 
-        form.inline {
-            display: inline;
+        .inline { display: inline; }
+
+        footer {
+            margin-top: 35px;
+            text-align: center;
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 14px;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 15px;
+        footer a {
+            color: var(--primary);
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
+
+        <!-- Theme Toggle -->
+        <div class="theme-toggle">
+            <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+
         <h1>📚 Book Management System</h1>
+
         {% block content %}{% endblock %}
+
+        <!-- Footer -->
+        <footer>
+            Created by 
+            <a href="https://in.linkedin.com/in/abdul-razak-bilal" target="_blank">
+                Abdul Razak Bilal
+            </a>
+        </footer>
     </div>
+
+    <!-- Theme Script -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle("dark");
+
+            // save preference
+            if (body.classList.contains("dark")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+        }
+
+        // Load saved theme
+        window.onload = () => {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark");
+            }
+        };
+    </script>
+
 </body>
 </html>
